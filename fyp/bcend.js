@@ -1,10 +1,10 @@
-const ipfsClient = require('ipfs-http-client');
+const ipfsClient = require('ipfs-http-client'); //this is giving me trouble 
 const express = require('express');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 
-const ipfs = new ipfsClient(
+const ipfs = new ipfsClient(              //and this is painpoint no 2, both the above and this are throowing errors
     { 
         host: 'localhost', 
         port: '5001', 
