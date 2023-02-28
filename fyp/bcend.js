@@ -1,15 +1,17 @@
-const ipfsClient = require('ipfs-http-client'); //(pain:1)this is giving me trouble, here if i do "import" instead of "require" the error goes to (pain:2)
+const {create} = require("ipfs-http-client"); //(pain:1)this is giving me trouble, here if i do "import" instead of "require" the error goes to (pain:2)
 const express = require('express');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 
-const ipfs = new ipfsClient(              //(pain:2)
+async function ipfsClient(){
+const ipfs = await create(              //(pain:2)
     { 
         host: 'localhost', 
         port: '5001', 
         protocol: 'http',
     });
+}
 
 const app = express();
 
