@@ -4,12 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo IPFS</title>
+    <title>Uploaded!</title>
+    <style>
+        body {
+            background-color: #fafafa;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        a {
+            color: #0070c0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>File Uploaded</h1>
-    <p>Name: <%= fileName %> </p>
-    <p>Link: <a href="https://ipfs.io/ipfs/<%= fileHash %>"></a></p>
-    
+    <video autoplay muted loop="myVideo">
+        <source src="https://cdn.pixabay.com/vimeo/700585622/connection-114164.mp4?rendition=source&expiry=1678174105&hash=7c29e32664e083699afaf15d25247ba64bdf1e98&download" type="video/mp4">
+    </video>
+    <h1>Upload Successful!</h1>
+    <p>File Name: <%= fileName %></p>
+    <p>File Link: <a href="http://bafybeidjg7hfug6cioauckfwe3pnu6shavn2x2tuvsfuan2skf5wtiakry.ipfs.localhost:8080/?filename=<%= fileHash %>"><%= fileHash %></a></p>
+    </script>
 </body>
 </html>
+
