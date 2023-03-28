@@ -70,13 +70,13 @@ const ipfs = ipfsClient.create(
 }
 
 const app = express();                  //creation of the express app
-
+myVideo=[{video:"backgroung.mp4"}]
 app.set('view engine', 'ejs');                       // view engine is set to ejs because that is being used as the template language
 app.use(bodyParser.urlencoded({extended: true}));    //init bodyparser
 app.use(fileUpload());                               //init fileuploader
 
 app.get('/',(req, res) =>{            //creation of the first route to render home.ejs
-    res.render('home');              //renders the home.ejs file 
+    res.render('home', {video:myVideo});              //renders the home.ejs file 
 });
 app.post('/upload', (req, res)=>{    //creation of the second route to render upload.ejs
     const file = req.files.file;
