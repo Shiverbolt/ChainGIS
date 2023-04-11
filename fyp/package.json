@@ -1,6 +1,7 @@
 {
   "name": "fyp",
   "version": "1.0.0",
+  "description": "final year project cse 2 2023",
   "main": "bcend.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,11 +13,9 @@
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
-    "ipfs-http-client": "^60.0.0"
+    "ipfs-http-client": "^52.0.1"
   },
-  "exports": {
-    "./package.json": "./package.json"
-  },
-  "devDependencies": {},
-  "description": ""
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
 }
