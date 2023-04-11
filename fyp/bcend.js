@@ -52,6 +52,7 @@ app.post('/upload', (req, res)=>{
   
     return fileHash;
 };
+module.exports = {addFile, getipfsClient};
 
 app.listen(3000, ()=>{
     console.log('Server is listening on port 3000');
