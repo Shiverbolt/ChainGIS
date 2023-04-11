@@ -1,7 +1,7 @@
 const ipfsClient = require('ipfs-http-client'); 
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-cosnt express = require('express');
+const express = require('express');
 const fs = require('fs');
 
 function getipfsClient(){
