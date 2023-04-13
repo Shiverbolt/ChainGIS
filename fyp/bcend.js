@@ -19,7 +19,15 @@ function getipfsClient(){
 const app = express();                  
 app.set('view engine', 'ejs');                       
 app.use(bodyParser.urlencoded({extended: true}));    
-app.use(fileUpload({createParentPath: true, useTempFiles : true, tempFileDir : '/tmp/', limits: { fileSize: 50 * 1024 * 1024 }, safeFileNames: true, preserveExtension: true, abortOnLimit: true, responseOnLimit: "File size limit has been reached"}));                               
+app.use(fileUpload({createParentPath: true, 
+                    useTempFiles : true, 
+                    tempFileDir : '/tmp/', 
+                    limits: { fileSize: 50 * 1024 * 1024 }, 
+                    safeFileNames: true, 
+                    preserveExtension: true, 
+                    abortOnLimit: true, 
+                    responseOnLimit: "File size limit has been reached"
+                }));                               
 
 app.use(session({ 
     secret: 'myappsecret', 
@@ -43,58 +51,77 @@ const writeUserData = (data) => {
     fs.writeFileSync(userDataFile, JSON.stringify(data), 'utf8');
 };
 
-app.post('/register', async (req, res) => {
+app.get('/', (req, res) => {
+    if (req.session.user) {
+      // if the user is already logged in, redirect to home page
+      res.redirect('/home');
+    } else {
+      res.render('login', { errorMessage: '' });
+    }
+  });
+  
+  app.get('/register', (req, res) => {
+    res.render('register', { errorMessage: '' });
+  });
+  
+  app.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    
+  
     const users = readUserData();
-      
+  
     // checking for existing data
     const user = users.find(u => u.username === username);
     if (user) {
-        return res.render('register', { errorMessage: 'Username already exists' });
+      return res.render('register', { errorMessage: 'Username already exists' });
     }
-      
-    // hasing the pass before storage
+  
+    // hashing the password before storage
     const hashedPassword = await bcrypt.hash(password, 10);
-      
+  
     // push a new user
     users.push({ username: username, password: hashedPassword });
     writeUserData(users);
-    
-    req.session.user = { username: username };
-    res.redirect('/');
-});
-
-app.get('/register', (req, res) => {
-    res.render('register', { errorMessage: '' });
-});
   
-app.post('/login', async (req, res) => {
+    req.session.user = { username: username };
+    res.redirect('/home');
+  });
+  app.get('/login', (req, res) => {
+    res.render('login', { errorMessage: '' });
+  });
+  
+  app.post('/login', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    
+  
     const users = readUserData();
-    
-    // find the user in the store data
+  
+    // find the user in the stored data
     const user = users.find(u => u.username === username);
     if (!user) {
-        return res.render('login', { errorMessage: 'Invalid login credentials' });
+      return res.render('login', { errorMessage: 'Invalid login credentials' });
     }
-      
-    // checking the hashed pass against the one we stored.
+  
+    // checking the hashed password against the one we stored
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-        return res.render('login', { errorMessage: 'Invalid login credentials' });
+      return res.render('login', { errorMessage: 'Invalid login credentials' });
     }
-    
+  
     req.session.user = { username: username };
-    res.render('home', { user: user });
-});
-
-app.get('/',(req, res) =>{            
-    res.render('login', {errorMessage: ''});              
-});
+    res.redirect('/home');
+  });
+  
+  app.get('/home', (req, res) => {
+    if (req.session.user) {
+      // if the user is logged in, render the home page
+      const user = readUserData().find(u => u.username === req.session.user.username);
+      res.render('home', { user: user });
+    } else {
+      // if the user is not logged in, redirect to the login page
+      res.redirect('/');
+    }
+  });
 
 
 
