@@ -112,7 +112,7 @@ app.get('/', (req, res) => {
     res.redirect('/home');
   });
   
-  app.get('/home', (req, res) => {
+   app.get('/home', (req, res) => {
     if (req.session.user) {
       // if the user is logged in, render the home page
       const user = readUserData().find(u => u.username === req.session.user.username);
@@ -121,37 +121,46 @@ app.get('/', (req, res) => {
       // if the user is not logged in, redirect to the login page
       res.redirect('/');
     }
+    
   });
 
-
-
-app.post('/upload', async (req, res) => {    
+  app.post('/upload', async (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No files were uploaded.');
+      return res.status(400).send('No files were uploaded.');
     }
-
-    console.log(req.files);
-
+  
+    const userFolder = `./users/${req.session.user.username}`;
+    if (!fs.existsSync(userFolder)) {
+      fs.mkdirSync(userFolder);
+    }
+  
     const files = Array.isArray(req.files.file) ? req.files.file : [req.files.file];
     const fileHashes = await Promise.all(
-        files.map(async (file) => {
-            const fileTimestamp = Date.now().toString() + '_' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-            const fileName = `${fileTimestamp}_${file.name}`;
-            const filePath = 'files/' + fileName;
-    
-            await file.mv(filePath);
-            const fileHash = await addFile(fileName, filePath);
-            fs.unlink(filePath, (err) => {
-                if (err) console.log(err);
-            });
-    
-            const fileUrl = `http://localhost:8080/ipfs/${fileHash}`;
-            return {fileName, fileHash, fileUrl};
-        })
+      files.map(async (file) => {
+        const fileTimestamp = Date.now().toString() + '_' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+        const fileName = `${fileTimestamp}_${file.name}`;
+        const filePath = `${userFolder}/${fileName}`;
+  
+        await file.mv(filePath);
+        const fileHash = await addFile(fileName, filePath);
+        fs.unlink(filePath, (err) => {
+          if (err) console.log(err);
+        });
+  
+        const fileUrl = `http://localhost:8080/ipfs/${fileHash}`;
+        return { fileName, fileHash, fileUrl };
+      })
     );
-    
-    res.render('upload', { files: fileHashes });            
-});
+  
+    const fileInfo = fileHashes.map((file) => {
+      return `${file.fileName}: ${file.fileHash} - ${file.fileUrl}`;
+    }).join('\n');
+  
+    const userFile = `${userFolder}/${req.session.user.username}.txt`;
+    fs.appendFileSync(userFile, fileInfo + '\n');
+
+    res.render('upload', { files: fileHashes });
+  });
 
 
 const addFile = async (fileName, filePath) => {
