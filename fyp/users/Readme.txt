@@ -1,0 +1,1 @@
+File attributes of the files uploaded by particular user. The name of the txt is the username itself and contains the information of the file that particular user has uploaded.
