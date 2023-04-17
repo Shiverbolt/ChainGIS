@@ -4,30 +4,50 @@ const ipfsClient = require('ipfs-http-client');
 const { addFile } = require('./bcend.js');
 
 describe('addFile function', () => {
-  it('should add a file to IPFS and return a valid file hash', async () => {
+  it('should add files to IPFS and return valid file hashes', async () => {
     const ipfs = ipfsClient.create({
       host: 'localhost',
       port: '5001',
       protocol: 'http',
     });
-    const fileName = 'test-file.tiff';
-    const filePath = 'test/' + fileName;
-    console.log('filePath:', filePath);
-    const fileContent = fs.readFileSync(filePath);
-
-    const fileHash = await addFile(fileName, filePath);
+    const folderPath = 'dataset-test';
+    const files = fs.readdirSync(folderPath);
+    let totalLatency = 0;
+    let numFilesProcessed = 0;
+    let numFilesCorrect = 0;
     
-    expect(fileHash).to.be.a('string');
-    expect(fileHash.length).to.equal(46);
+    for (let i = 0; i < files.length; i++) {
+      const fileName = files[i];
+      const filePath = folderPath + '/' + fileName;
+      console.log('filePath:', filePath);
+      const fileContent = fs.readFileSync(filePath);
 
-    const ipfsFile = await ipfs.cat(fileHash);
-    const chunks = []
-    for await (const chunk of ipfsFile) {
-      chunks.push(chunk)
+      const startTime = new Date().getTime();
+      const fileHash = await addFile(fileName, filePath);
+      const endTime = new Date().getTime();
+      const latency = endTime - startTime;
+      totalLatency += latency;
+      numFilesProcessed++;
+
+      expect(fileHash).to.be.a('string');
+      expect(fileHash.length).to.equal(46);
+
+      const ipfsFile = await ipfs.cat(fileHash);
+      const chunks = []
+      for await (const chunk of ipfsFile) {
+        chunks.push(chunk)
+      }
+      const fileContentFromIpfs = Buffer.concat(chunks)
+      console.log('filecontentfromipfs:', fileContentFromIpfs);
+
+      if (fileContentFromIpfs.equals(fileContent)) {
+        numFilesCorrect++;
+      }
     }
-    const fileContentFromIpfs = Buffer.concat(chunks)
-    console.log('filecontentfromipfs:', fileContentFromIpfs);
 
-    expect(fileContentFromIpfs).to.deep.equal(fileContent);
+    const accuracy = numFilesCorrect / numFilesProcessed;
+    const averageLatency = totalLatency / numFilesProcessed;
+    console.log('Accuracy:', (accuracy * 100).toFixed(2) + '%');
+    console.log('Average Latency:', averageLatency, 'ms');
   });
 });
