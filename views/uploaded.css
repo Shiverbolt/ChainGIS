@@ -1,0 +1,68 @@
+* 
+{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body
+{
+  font-family: 'Nunito', sans-serif;
+}
+
+#notnav 
+{
+  background-color: #f9f9f9;
+  font-size: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 95vh;
+  color: #333;
+}
+  
+nav
+{ 
+  height: 5vh;
+}
+
+h1 
+{
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+a 
+{
+  color: #0070c0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover
+{
+  text-decoration: underline;
+}
+
+table
+{
+  border-collapse: collapse;
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 600px;
+}
+
+th, td 
+{
+  padding: 1rem;
+  text-align: left;
+  border: 1px solid #eee;
+}
+
+th
+{
+  background-color: #0070c0;
+  color: #fff;
+}

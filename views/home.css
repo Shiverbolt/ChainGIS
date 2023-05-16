@@ -1,0 +1,78 @@
+*
+{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body
+{
+  font-family: 'Nunito', sans-serif;
+}
+
+#notnav
+{
+  background-color: #daaaaa;
+  display: flex;
+  width: 100%;
+  height: 95vh;
+  color: #333; 
+}
+  
+nav
+{ 
+  height: 5vh;
+}
+
+#notnav div
+{
+  width:50%;
+}
+
+#div1
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#div2
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#div11
+{
+  background-color: aqua;
+  font-weight: 100;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  text-justify: inter-word;
+  width:50%;
+  height:50%;
+  word-spacing: 30px;
+  
+}
+
+#div21
+{
+  background-color: blueviolet;
+  width:50%;
+  height:50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+button
+{
+  height: 20%;
+  width: 60%;
+  font-size: 3rem;
+  border-radius: 10px;
+}
