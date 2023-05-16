@@ -10,13 +10,39 @@ body
   font-family: 'Nunito', sans-serif;
 }
 
+#mainNavbar
+{
+  background-color: rgb(222,192,222);
+  font-size: 1.6rem;
+  font-weight: 100;
+}
+
+.navbar-brand
+{
+  color: #EA1C2C;
+  font-size: 1.6rem;
+  font-weight: 100;
+}
+
+.nav-link
+{
+  color: white;
+  margin-left: 3px;
+  margin-right: 3px;
+  
+}
+
+#mainNavbar .nav-link:hover 
+{
+    color: #EA1C2C;
+}
+
 #notnav
 {
-  background-color: #daaaaa;
   display: flex;
   width: 100%;
   height: 95vh;
-  color: #333; 
+  background-color: #6dd8d9;
 }
   
 nav
@@ -45,22 +71,27 @@ nav
 
 #div11
 {
-  background-color: aqua;
+  
   font-weight: 100;
   font-size: 3rem;
   display: flex;
   align-items: center;
-  text-align: justify;
-  text-justify: inter-word;
+  justify-content: center;
   width:50%;
   height:50%;
   word-spacing: 30px;
-  
+  color: white;
+}
+
+p
+{
+  margin-bottom: 0;
+  text-align: center;
 }
 
 #div21
 {
-  background-color: blueviolet;
+  
   width:50%;
   height:50%;
   display: flex;
@@ -69,7 +100,7 @@ nav
   flex-direction: column;
 }
 
-button
+#notnavbuttons
 {
   height: 20%;
   width: 60%;
