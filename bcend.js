@@ -76,6 +76,11 @@ app.get('/', (req, res) => {
   res.render('home', { user: req.session.user });
 });
 
+//added to go back to home page - ayush
+app.get('/home', (req, res) => {
+  res.render('home', { errorMessage: '' });
+});
+
 app.get('/about', (req, res) => {
   res.render('about', { errorMessage: '' });
 });
