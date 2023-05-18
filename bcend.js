@@ -134,8 +134,68 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.post('/logout', (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.status(400).send('Unable to log out');
+      } else {
+        res.redirect('/login');
+      }
+    });
+  } else {
+    res.end();
+  }
+});
+
 app.get('/upload', isAuthenticated, (req, res) => {
   res.render('upload', { user: req.session.user });
+});
+
+app.get('/filelist', (req, res) => {
+  if (!req.session.user || !req.session.user.username) {
+    return res.redirect('/login'); // Redirect to login if user is not authenticated
+  }
+  const userFolder = `./users/${req.session.user.username}`;
+  fs.readFile(`${userFolder}/${req.session.user.username}.txt`, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    const fileList = data.split('\n').filter(line => line.trim() !== '');
+    res.render('filelist.ejs', { fileList },);
+  });
+});
+
+app.get('/delete/:index', (req, res) => {
+  if (!req.session.user || !req.session.user.username) {
+    return res.redirect('/login'); // Redirect to login if user is not authenticated
+  }
+  const userFolder = `./users/${req.session.user.username}`;
+  fs.readFile(`${userFolder}/${req.session.user.username}.txt`, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    let fileList = data.split('\n').filter(line => line.trim() !== '');
+    if (index >= 0 && index < fileList.length) {
+      fileList.splice(index, 1);
+
+      // Save the updated file list back to the text file
+      fs.readFile(`${userFolder}/${req.session.user.username}.txt`, fileList.join('\n'), 'utf8', (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('Internal Server Error');
+        }
+
+        res.redirect('/filelist');
+      });
+    } else {
+      res.status(404).send('Record not found');
+    }
+  });
 });
 
 // Routes for handling file uploads, etc.
@@ -176,7 +236,6 @@ app.post('/uploaded', async (req, res) => {
 
   res.render('uploaded', { files: fileHashes });
 });
-
 
 const addFile = async (fileName, filePath) => {
   const ipfs = getipfsClient(); 
