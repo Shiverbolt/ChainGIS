@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .search-bar {
+      margin-bottom: 20px;
+    }
+
+    .file-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .file-item {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .file-info {
+      margin-bottom: 10px;
+    }
+
+    .file-link {
+      color: #007bff;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function searchFiles() {
+      const input = document.getElementById('search-input');
+      const filter = input.value.toUpperCase();
+      const items = document.querySelectorAll('.file-item');
+
+      items.forEach(item => {
+        const filename = item.querySelector('.filename').textContent.toUpperCase();
+        item.style.display = filename.includes(filter) ? '' : 'none';
+      });
+    }
+
+    function sortFiles() {
+      const list = document.getElementById('file-list');
+      const items = Array.from(list.getElementsByClassName('file-item'));
+
+      items.sort((a, b) => {
+        const filenameA = a.querySelector('.filename').textContent.toLowerCase();
+        const filenameB = b.querySelector('.filename').textContent.toLowerCase();
+
+        if (filenameA < filenameB) return -1;
+        if (filenameA > filenameB) return 1;
+        return 0;
+      });
+
+      items.forEach(item => list.appendChild(item));
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>File List</h1>
+
+    <div class="search-bar">
+      <label for="search-input">Search:</label>
+      <input type="text" id="search-input" onkeyup="searchFiles()">
+    </div>
+
+    <button onclick="sortFiles()">Sort by Filename</button>
+
+    <ul id="file-list" class="file-list">
+      <% fileList.forEach((file, index) => { %>
+        <li class="file-item">
+          <div class="file-info">
+            <strong class="filename">Filename:</strong> <%= file.split(':')[0] %><br>
+            <strong>Filehash:</strong> <%= file.split(':')[1] %><br>
+            <strong>Filelink:</strong> <a class="file-link" href="<%= file.split('- ')[1] %>"><%= file.split('- ')[1] %></a>
+          </div>
+          <form method="POST" action="/delete/<%= index %>">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</body>
+</html>
