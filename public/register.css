@@ -12,14 +12,14 @@ body
 
 #mainNavbar
 {
-  background-color: rgb(222,192,222);
+  background-color: #696969;
   font-size: 1.6rem;
   font-weight: 100;
 }
 
 .navbar-brand
 {
-  color: #EA1C2C;
+  color: whitesmoke;
   font-size: 1.6rem;
   font-weight: 100;
 }
@@ -33,16 +33,26 @@ body
 
 #mainNavbar .nav-link:hover 
 {
-    color: #EA1C2C;
+    color: black;
 }
 
 #notnav 
 {
-  background-color: #6dd8d9;
+  background-color: #DCDCDC;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 95vh;
+  position: relative;
+}
+
+video
+{
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 nav
@@ -52,19 +62,21 @@ nav
 
 h1 
 {
-  font-size: 30px;
+  font-size: 2rem;
   text-align: center;
   margin-bottom: 30px;
   color: white;
+  z-index: 2;
 }
   
 form 
 {
   max-width: 450px;
-  background-color: #2cc5c4;
+  background-color: rgba(0,0,0,0.8);
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 label 
 {
@@ -72,6 +84,7 @@ label
   font-size: 1.4rem;
   margin-bottom: 5px;
   color: white;
+  z-index: 2;
 }
 
 input[type="text"], input[type="email"], input[type="password"] 
@@ -83,11 +96,12 @@ input[type="text"], input[type="email"], input[type="password"]
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-bottom: 20px;
+  z-index: 2;
 }
 
 input[type="submit"] 
 {
-  background-color: #333;
+  background-color: #808080;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -96,11 +110,13 @@ input[type="submit"]
   cursor: pointer;
   display: block;
   width: 100%;
+  z-index: 2;
 }
   
 input[type="submit"]:hover 
 {
-  background-color: #555;
+  background-color: #424649;
+  z-index: 2;
 }
 
 p 
@@ -108,5 +124,10 @@ p
   text-align: center;
   margin-top: 20px;
   font-size: 1.4rem;
-  color: white
+  color: white;
+}
+
+p a
+{
+  color: #6CB4EE;
 }

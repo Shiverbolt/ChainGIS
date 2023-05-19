@@ -12,14 +12,14 @@ body
 
 #mainNavbar
 {
-  background-color: rgb(222,192,222);
+  background-color: #696969;
   font-size: 1.6rem;
   font-weight: 100;
 }
 
 .navbar-brand
 {
-  color: #EA1C2C;
+  color: whitesmoke;
   font-size: 1.6rem;
   font-weight: 100;
 }
@@ -33,10 +33,10 @@ body
 
 #mainNavbar .nav-link:hover 
 {
-    color: #EA1C2C;
+    color: black;
 }
 
-#notnav
+#notnav, .home
 {
   display: flex;
   flex-direction: column;
@@ -44,7 +44,17 @@ body
   align-items: center;
   width: 100%;
   height: 95vh;
-  background-color: #6dd8d9;
+  background-color: #DCDCDC;
+  position: relative;
+}
+
+video
+{
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 nav
@@ -56,17 +66,23 @@ nav
 {
     font-size: xxx-large;
     margin-bottom: 0rem;
+    margin-top: 10px;
+    z-index: 2;
+    color: white;
+    display: flex;
+    justify-content: center;
 }
 
 #aboutbox
 {
     display: flex;
     width: 70%;
-    height: 60%;
+    height: 65%;
     flex-direction: column;
     border: solid 0px;
     border-radius: 15px;
-    background-color: palevioletred;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 2;
 }
 
 #div1, #div2
@@ -77,6 +93,7 @@ nav
   height: 50%;
   width: 100%;
   font-size: 1.8rem;
+  z-index: 2;
 }
 
 .container
@@ -89,6 +106,7 @@ nav
   padding-left: 0px;
   padding-right: 0px;
   margin: auto;
+  z-index: 2;
 }
 
 img 
@@ -96,6 +114,8 @@ img
     max-width: 100%;
     max-height: 100%;
     border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    z-index: 2;
     
 }
 
@@ -105,4 +125,5 @@ img
   font-size: 2rem;
   margin: auto;
   color: white;
+  z-index: 2;
 }

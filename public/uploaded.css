@@ -12,14 +12,14 @@ body
 
 #mainNavbar
 {
-  background-color: rgb(222,192,222);
+  background-color: #696969;
   font-size: 1.6rem;
   font-weight: 100;
 }
 
 .navbar-brand
 {
-  color: #EA1C2C;
+  color: whitesmoke;
   font-size: 1.6rem;
   font-weight: 100;
 }
@@ -33,18 +33,29 @@ body
 
 #mainNavbar .nav-link:hover 
 {
-    color: #EA1C2C;
+    color: black;
 }
 
-#notnav 
+#notnav, .home
 {
-  background-color: #6dd8d9;
+  background-color: #DCDCDC;
   font-size: 16px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  position: relative;
   height: 95vh;
+}
+
+video
+{
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
   
 nav
@@ -52,31 +63,41 @@ nav
   height: 5vh;
 }
 
+
+#overlay
+{
+  background-color: rgba(0,0,0,0.8);
+  width:75%;
+  z-index: 2;
+  border: 0px;
+  border-radius: 20px;
+  overflow: scroll;
+}
+
 h1 
 {
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 2rem;
+  z-index: 3;
+  color: white;
+  padding-top: 20px;
 }
 
 a 
 {
-  color: #0070c0;
+  color: #6CB4EE;
   text-decoration: none;
   font-weight: bold;
-}
-
-a:hover
-{
-  text-decoration: underline;
+  z-index: 3;
 }
 
 table
 {
   border-collapse: collapse;
   margin: 3rem auto;
-  width: 90%;
-  max-width: 600px;
+  width: 80%;
+  z-index: 3;
 }
 
 th, td 
@@ -84,10 +105,40 @@ th, td
   padding: 1rem;
   text-align: left;
   border: 1px solid #eee;
+  color: white;
+  z-index: 3;
+  font-size: 1.2rem;
 }
 
 th
 {
-  background-color: #0070c0;
+  background-color: #808080;
   color: #fff;
+  z-index: 3;
+  font-size: 1.2rem;
+}
+
+td a
+{
+  text-decoration: underline;
+}
+
+#logoutbt
+{
+  background-color: rgba(255,255,255,0);
+  border: 0px;
+  color: white;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+#logoutbt:hover
+{
+  color: black;
+}
+
+#logoutbtform
+{
+  display: flex;
+  align-items: center;
 }
