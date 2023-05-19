@@ -13,32 +13,28 @@
 <body>
     <nav id="mainNavbar" class="navbar navbar-expand-sm py-0">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/home">BRAND_NAME</a>
+        <a class="navbar-brand" href="/home">Final Year Project</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link active" aria-current="page" href="/home" style="color: #EA1C2C">HOME</a>
-            <a class="nav-link" href="/upload">UPLOAD</a>
-            <a class="nav-link" href="/about">ABOUT US</a>
-            <a class="nav-link" href="/login">SIGN IN</a>
-            <a class="nav-link" href="/register">SIGN UP</a>
+            <a class="nav-link active" aria-current="page" href="/home" style="color: black">Home</a>
+            <a class="nav-link" href="/upload">Upload</a>
+            <a class="nav-link" href="/about">About us</a>
           </div>
         </div>
       </div>
     </nav>
-    <div id="notnav">
+    <div id="notnav" class="home">
+      <video autoplay muted loop>
+        <source src="/vid.mp4"/>
+      </video>
       <div id="div1" >
-        <div id="div11">
-          <p>STORAGE AND ORGANISATION OF GEOSPATIAL DATA IN DISTRIBUTED BLOCKCHAIN USING IPFS</p>
-        </div>
+        <button id="notnavbuttons" type="button" class="btn btn-dark" onclick="window.location.href='/login'">Sign in</button>
       </div>
       <div id="div2" >
-        <div id="div21">
-          <button id="notnavbuttons" type="button" class="btn btn-primary" onclick="window.location.href='/login'">Sign in</button>
-          <button id="notnavbuttons" type="button" class="btn btn-primary" onclick="window.location.href='/register'">Sign up</button>
-        </div>
+        <button id="notnavbuttons" type="button" class="btn btn-dark" onclick="window.location.href='/register'">Sign up</button>
       </div>
     </div>
 

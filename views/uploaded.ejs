@@ -13,43 +13,52 @@
   <body>
     <nav id="mainNavbar" class="navbar navbar-expand-sm py-0">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/home">BRAND_NAME</a>
+        <a class="navbar-brand" href="/home">Final Year Project</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link"  href="/home">HOME</a>
-            <a class="nav-link" href="/upload">UPLOAD</a>
-            <a class="nav-link" href="/about">ABOUT US</a>
-            <a class="nav-link active" aria-current="page" href="/login" style="color: #EA1C2C">SIGN IN</a>
-            <a class="nav-link" href="/register">Sign up</a>
+            <a class="nav-link" href="/home">Home</a>
+            <a class="nav-link" href="/upload">Upload</a>
+            <a class="nav-link" href="/about">About us</a>
+            <a class="nav-link" href="/filelist">File list</a>
+            <form id="logoutbtform" action="/logout" method="post">
+              <button id="logoutbt" type="submit">Logout</button>
+            </form>
           </div>
         </div>
       </div>
     </nav>
-    <div id="notnav">
-      <h1>Upload Successful!</h1>
-      <% if (files.length > 0) { %>
-        <table>
-          <thead>
-            <tr>
-              <th>File Name</th>
-              <th>File Link</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (var i = 0; i < files.length; i++) { %>
-              <tr>
-                <td><%= files[i].fileName %></td>
-                <td><a href="<%= files[i].fileUrl %>"><%= files[i].fileHash %></a></td>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
-      <% } else { %>
-        <p>No files uploaded yet.</p>
-      <% } %>
+    <div id="notnav" class="home">
+      <video autoplay muted loop>
+        <source src="/vid.mp4"/>
+      </video>
+      <div id="overlay">
+        <h1>Upload Successful!</h1>
+          <% if (files.length > 0) { %>
+            <table>
+              <thead>
+                <tr>
+                  <th>File Name</th>
+                  <th>File Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (var i = 0; i < files.length; i++) { %>
+                  <tr>
+                    <td><%= files[i].fileName %></td>
+                    <td><a href="<%= files[i].fileUrl %>"><%= files[i].fileHash %></a></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          <% } else { %>
+            <p>No files uploaded yet.</p>
+          <% } %>
+      </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
 </html>
