@@ -149,10 +149,6 @@ app.post('/logout', (req, res) => {
 });
 
 app.get('/upload', isAuthenticated, (req, res) => {
-  res.render('upload', { user: req.session.user });
-});
-
-app.get('/filelist', (req, res) => {
   if (!req.session.user || !req.session.user.username) {
     return res.redirect('/login'); // Redirect to login if user is not authenticated
   }
@@ -164,7 +160,7 @@ app.get('/filelist', (req, res) => {
     }
 
     const fileList = data.split('\n').filter(line => line.trim() !== '');
-    res.render('filelist.ejs', { fileList },);
+    res.render('upload.ejs', { user: req.session.user, fileList });
   });
 });
 
@@ -191,7 +187,7 @@ app.post('/delete/:index', (req, res) => {
           return res.status(500).send('Internal Server Error');
         }
 
-        res.redirect('/filelist');
+        res.redirect('/upload');
       });
     } else {
       res.status(404).send('Record not found');
