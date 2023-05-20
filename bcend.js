@@ -168,7 +168,7 @@ app.get('/filelist', (req, res) => {
   });
 });
 
-app.get('/delete/:index', (req, res) => {
+app.post('/delete/:index', (req, res) => {
   if (!req.session.user || !req.session.user.username) {
     return res.redirect('/login'); // Redirect to login if user is not authenticated
   }
@@ -180,11 +180,12 @@ app.get('/delete/:index', (req, res) => {
     }
 
     let fileList = data.split('\n').filter(line => line.trim() !== '');
+    const index = parseInt(req.params.index, 10); // Get the index from the request parameters
     if (index >= 0 && index < fileList.length) {
       fileList.splice(index, 1);
 
       // Save the updated file list back to the text file
-      fs.readFile(`${userFolder}/${req.session.user.username}.txt`, fileList.join('\n'), 'utf8', (err) => {
+      fs.writeFile(`${userFolder}/${req.session.user.username}.txt`, fileList.join('\n'), 'utf8', (err) => {
         if (err) {
           console.error(err);
           return res.status(500).send('Internal Server Error');
@@ -200,6 +201,9 @@ app.get('/delete/:index', (req, res) => {
 
 // Routes for handling file uploads, etc.
 app.post('/uploaded', async (req, res) => {
+  if (!req.session.user || !req.session.user.username) {
+    return res.redirect('/login'); // Redirect to login if user is not authenticated
+  }
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
