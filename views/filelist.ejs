@@ -39,7 +39,7 @@
     
         <div class="search-bar">
           <label for="search-input">Search:</label>
-          <input type="text" id="search-input" onkeyup="searchFiles()">
+          <input type="text" id="search-input">
         </div>
     
         <button id="sortbt" type="button" class="btn btn-dark" onclick="sortFiles()">Sort by Filename</button>
@@ -63,16 +63,15 @@
   </div>
 
   <script>
-    function searchFiles() {
-      const input = document.getElementById('search-input');
-      const filter = input.value.toUpperCase();
-      const items = document.querySelectorAll('.file-item');
-
-      items.forEach(item => {
-        const filename = item.querySelector('.filename').textContent.toUpperCase();
-        item.style.display = filename.includes(filter) ? '' : 'none';
-      });
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('search-input').addEventListener('keyup', function() {
+    var value = this.value.toLowerCase();
+    var listItems = document.querySelectorAll('#file-list li');
+    listItems.forEach(function(item) {
+      item.style.display = item.textContent.toLowerCase().indexOf(value) > -1 ? '' : 'none';
+    });
+  });
+});
 
     function sortFiles() {
       const list = document.getElementById('file-list');
