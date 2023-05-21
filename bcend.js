@@ -60,7 +60,11 @@ const readUserData = () => {
 };
 
 const writeUserData = (data) => {
-  fs.writeFileSync(userDataFile, JSON.stringify(data), 'utf8');
+  try {
+    fs.writeFileSync(userDataFile, JSON.stringify(data), 'utf8');
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Middleware for checking if user is authenticated
@@ -73,12 +77,11 @@ const isAuthenticated = (req, res, next) => {
 };
 
 app.get('/', (req, res) => {
-  res.render('home', { user: req.session.user });
+  res.render('login', { user: req.session.user, errorMessage: '' });
 });
 
-//added to go back to home page - ayush
 app.get('/home', (req, res) => {
-  res.render('home', { errorMessage: '' });
+  res.render('login', { errorMessage: '' });
 });
 
 app.get('/about', (req, res) => {
@@ -88,6 +91,7 @@ app.get('/about', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('register', { errorMessage: '' });
 });
+
 
 app.post('/register', async (req, res) => {
   try {
@@ -102,7 +106,7 @@ app.post('/register', async (req, res) => {
     users.push({ username: username, password: hashedPassword });
     writeUserData(users);
     req.session.user = { username: username };
-    res.redirect('/upload');
+    res.redirect('/login');
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal server error');
@@ -228,7 +232,7 @@ app.post('/uploaded', async (req, res) => {
   );
 
   const fileInfo = fileHashes.map((file) => {
-    return `${file.fileName}: ${file.fileHash} - ${file.fileUrl}`;
+    return `${file.fileName} - ${file.fileHash} - ${file.fileUrl}`;
   }).join('\n');
 
   const userFile = `${userFolder}/${req.session.user.username}.txt`;
