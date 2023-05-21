@@ -19,7 +19,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link" href="/home">Home</a>
             <a class="nav-link" href="/upload">Upload</a>
             <a class="nav-link" href="/about">About us</a>
             <a id="loginbt" class="nav-link active" aria-current="page" href="/login" style="color: black;">Sign in</a>
@@ -32,18 +31,24 @@
       <video autoplay muted loop>
         <source src="/vid.mp4"/>
       </video>
-      <form method="POST" action="/login">
-        <h1>Login</h1>
-        <% if (errorMessage || false) { %>
-         <p><%= errorMessage %></p>
-        <% } %>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <input type="submit" value="Login">
-        <p>Don't have an account? <a href="/register">Register here</a>.</p>
-      </form>
+      <div id="div1">
+        <p id="div1p">Revolutionizing Geospatial Data Storage: Secure, Efficient, and Immutable Blockchain Solution</p>
+      </div>
+      <div id="div2">
+        <form method="POST" action="/login">
+          <h1>Login</h1>
+          <% if (errorMessage || false) { %>
+           <p><%= errorMessage %></p>
+          <% } %>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <input type="submit" value="Login">
+          <p>Don't have an account? <a href="/register">Register here</a>.</p>
+        </form>
+      </div>
+      
     </div>
 
     

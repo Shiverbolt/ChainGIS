@@ -19,7 +19,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link" href="/home">Home</a>
             <a class="nav-link" href="/upload">Upload</a>
             <a class="nav-link" href="/about">About us</a>
             <a class="nav-link" href="/login">Sign in</a>
@@ -32,22 +31,27 @@
       <video autoplay muted loop>
         <source src="/vid.mp4"/>
       </video>
-      <form method="POST" action="/register">
-        <h1>Register</h1>
-        <% if (errorMessage) { %>
-        <p><%= errorMessage %></p>
-        <% } %>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <input type="submit" value="Register">
-        <p>Already have an account? <a href="/login">Login here</a>.</p>
-      </form>
+      <div id="div1">
+        <p id="div1p">Revolutionizing Geospatial Data Storage: Secure, Efficient, and Immutable Blockchain Solution</p>
+      </div>
+      <div id="div2">
+        <form method="POST" action="/register">
+          <h1>Register</h1>
+          <% if (errorMessage) { %>
+          <p><%= errorMessage %></p>
+          <% } %>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <input type="submit" value="Register">
+          <p>Already have an account? <a href="/login">Login here</a>.</p>
+        </form>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
