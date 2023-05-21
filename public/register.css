@@ -131,3 +131,28 @@ p a
 {
   color: #6CB4EE;
 }
+
+#div1
+{
+  z-index: 2;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#div2
+{
+  z-index: 2;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#div1p
+{
+  width: 70%;
+  height: 70%;
+  font-size: 3.5rem;
+}
