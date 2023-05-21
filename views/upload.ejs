@@ -52,9 +52,9 @@
           <% fileList.forEach((file, index) => { %>
             <li class="file-item">
               <div class="file-info">
-                <strong class="filename">Filename:</strong> <%= file.split(':')[0] %><br>
-                <strong>Filehash:</strong> <%= file.split(':')[1] %><br>
-                <strong>Filelink:</strong> <a class="file-link" href="<%= file.split('- ')[1] %>"><%=   file.split('- ')[1] %></a>
+                <strong class="filename">Filename:</strong> <%= file.split('-')[0] %><br>
+                <strong>Filehash:</strong> <%= file.split('-')[1] %><br>
+                <strong>Filelink:</strong> <a class="file-link" href="<%= file.split('- ')[2] %>"><%=   file.split('- ')[2] %></a>
               </div>
               <form method="POST" action="/delete/<%= index %>">
                 <button type="submit" class="delete-btn">Delete</button>
