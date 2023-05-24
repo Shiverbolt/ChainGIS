@@ -232,7 +232,7 @@ app.post('/uploaded', async (req, res) => {
   );
 
   const fileInfo = fileHashes.map((file) => {
-    return `${file.fileName} - ${file.fileHash} - ${file.fileUrl}`;
+    return `${file.fileName}: ${file.fileHash} - ${file.fileUrl}`;
   }).join('\n');
 
   const userFile = `${userFolder}/${req.session.user.username}.txt`;
@@ -248,6 +248,8 @@ const addFile = async (fileName, filePath) => {
   const fileHash = fileAdded.cid.toString(); 
   return fileHash;
 };
+
+module.exports = { addFile };
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server started on port 3000');
