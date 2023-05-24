@@ -4,7 +4,8 @@ const ipfsClient = require('ipfs-http-client');
 const { addFile } = require('./bcend.js');
 
 describe('addFile function', () => {
-  it('should add files to IPFS and return valid file hashes', async () => {
+  it('should add files to IPFS and return valid file hashes', async function() {
+    this.timeout(10000);
     const ipfs = ipfsClient.create({
       host: 'localhost',
       port: '5001',
