@@ -97,6 +97,10 @@ app.post('/register', async (req, res) => {
   try {
     const username = req.body.username;
     const password = req.body.password;
+    // Usernames become folder names under ./users, so keep them path-safe
+    if (!/^[A-Za-z0-9_-]{3,32}$/.test(username || '')) {
+      return res.render('register', { errorMessage: 'Username must be 3-32 letters, numbers, _ or -' });
+    }
     const users = readUserData();
     const user = users.find((u) => u.username === username);
     if (user) {
@@ -158,6 +162,10 @@ app.get('/upload', isAuthenticated, (req, res) => {
   }
   const userFolder = `./users/${req.session.user.username}`;
   fs.readFile(`${userFolder}/${req.session.user.username}.txt`, 'utf8', (err, data) => {
+    // A new user has no upload record yet
+    if (err && err.code === 'ENOENT') {
+      return res.render('upload.ejs', { user: req.session.user, fileList: [] });
+    }
     if (err) {
       console.error(err);
       return res.status(500).send('Internal Server Error');
@@ -210,7 +218,7 @@ app.post('/uploaded', async (req, res) => {
 
   const userFolder = `./users/${req.session.user.username}`;
   if (!fs.existsSync(userFolder)) {
-    fs.mkdirSync(userFolder);
+    fs.mkdirSync(userFolder, { recursive: true });
   }
 
   const files = Array.isArray(req.files.file) ? req.files.file : [req.files.file];
@@ -251,7 +259,8 @@ const addFile = async (fileName, filePath) => {
 
 module.exports = { addFile };
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Server started on port 3000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
 

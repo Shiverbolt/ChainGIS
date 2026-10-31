@@ -1,0 +1,21 @@
+{
+  "name": "chaingis",
+  "version": "1.0.0",
+  "description": "Storage and organisation of large-scale geospatial data on a distributed blockchain using IPFS",
+  "main": "bcend.js",
+  "scripts": {
+    "start": "node bcend.js"
+  },
+  "author": "Shivanshu Singh, Ayush",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-session": "^1.18.0",
+    "ipfs-http-client": "^52.0.1"
+  }
+}
